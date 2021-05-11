@@ -24,12 +24,14 @@ import java.util.Objects;
 @JsonPropertyOrder({
   SecurityMonitoringRuleCreatePayload.JSON_PROPERTY_CASES,
   SecurityMonitoringRuleCreatePayload.JSON_PROPERTY_FILTERS,
+  SecurityMonitoringRuleCreatePayload.JSON_PROPERTY_HAS_EXTENDED_TITLE,
   SecurityMonitoringRuleCreatePayload.JSON_PROPERTY_IS_ENABLED,
   SecurityMonitoringRuleCreatePayload.JSON_PROPERTY_MESSAGE,
   SecurityMonitoringRuleCreatePayload.JSON_PROPERTY_NAME,
   SecurityMonitoringRuleCreatePayload.JSON_PROPERTY_OPTIONS,
   SecurityMonitoringRuleCreatePayload.JSON_PROPERTY_QUERIES,
-  SecurityMonitoringRuleCreatePayload.JSON_PROPERTY_TAGS
+  SecurityMonitoringRuleCreatePayload.JSON_PROPERTY_TAGS,
+  SecurityMonitoringRuleCreatePayload.JSON_PROPERTY_TYPE
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class SecurityMonitoringRuleCreatePayload {
@@ -38,6 +40,9 @@ public class SecurityMonitoringRuleCreatePayload {
 
   public static final String JSON_PROPERTY_FILTERS = "filters";
   private List<SecurityMonitoringFilter> filters = null;
+
+  public static final String JSON_PROPERTY_HAS_EXTENDED_TITLE = "hasExtendedTitle";
+  private Boolean hasExtendedTitle;
 
   public static final String JSON_PROPERTY_IS_ENABLED = "isEnabled";
   private Boolean isEnabled;
@@ -56,6 +61,9 @@ public class SecurityMonitoringRuleCreatePayload {
 
   public static final String JSON_PROPERTY_TAGS = "tags";
   private List<String> tags = null;
+
+  public static final String JSON_PROPERTY_TYPE = "type";
+  private SecurityMonitoringRuleType type = SecurityMonitoringRuleType.LOG_DETECTION;
 
   public SecurityMonitoringRuleCreatePayload cases(List<SecurityMonitoringRuleCaseCreate> cases) {
     this.cases = cases;
@@ -115,6 +123,30 @@ public class SecurityMonitoringRuleCreatePayload {
     this.filters = filters;
   }
 
+  public SecurityMonitoringRuleCreatePayload hasExtendedTitle(Boolean hasExtendedTitle) {
+    this.hasExtendedTitle = hasExtendedTitle;
+    return this;
+  }
+
+  /**
+   * Whether the notifications include the triggering group-by values in their title.
+   *
+   * @return hasExtendedTitle
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(
+      example = "true",
+      value = "Whether the notifications include the triggering group-by values in their title.")
+  @JsonProperty(JSON_PROPERTY_HAS_EXTENDED_TITLE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getHasExtendedTitle() {
+    return hasExtendedTitle;
+  }
+
+  public void setHasExtendedTitle(Boolean hasExtendedTitle) {
+    this.hasExtendedTitle = hasExtendedTitle;
+  }
+
   public SecurityMonitoringRuleCreatePayload isEnabled(Boolean isEnabled) {
     this.isEnabled = isEnabled;
     return this;
@@ -167,7 +199,10 @@ public class SecurityMonitoringRuleCreatePayload {
    *
    * @return name
    */
-  @ApiModelProperty(example = "", required = true, value = "The name of the rule.")
+  @ApiModelProperty(
+      example = "My security monitoring rule.",
+      required = true,
+      value = "The name of the rule.")
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getName() {
@@ -262,6 +297,28 @@ public class SecurityMonitoringRuleCreatePayload {
     this.tags = tags;
   }
 
+  public SecurityMonitoringRuleCreatePayload type(SecurityMonitoringRuleType type) {
+    this.type = type;
+    return this;
+  }
+
+  /**
+   * Get type
+   *
+   * @return type
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public SecurityMonitoringRuleType getType() {
+    return type;
+  }
+
+  public void setType(SecurityMonitoringRuleType type) {
+    this.type = type;
+  }
+
   /** Return true if this SecurityMonitoringRuleCreatePayload object is equal to o. */
   @Override
   public boolean equals(Object o) {
@@ -275,17 +332,21 @@ public class SecurityMonitoringRuleCreatePayload {
         (SecurityMonitoringRuleCreatePayload) o;
     return Objects.equals(this.cases, securityMonitoringRuleCreatePayload.cases)
         && Objects.equals(this.filters, securityMonitoringRuleCreatePayload.filters)
+        && Objects.equals(
+            this.hasExtendedTitle, securityMonitoringRuleCreatePayload.hasExtendedTitle)
         && Objects.equals(this.isEnabled, securityMonitoringRuleCreatePayload.isEnabled)
         && Objects.equals(this.message, securityMonitoringRuleCreatePayload.message)
         && Objects.equals(this.name, securityMonitoringRuleCreatePayload.name)
         && Objects.equals(this.options, securityMonitoringRuleCreatePayload.options)
         && Objects.equals(this.queries, securityMonitoringRuleCreatePayload.queries)
-        && Objects.equals(this.tags, securityMonitoringRuleCreatePayload.tags);
+        && Objects.equals(this.tags, securityMonitoringRuleCreatePayload.tags)
+        && Objects.equals(this.type, securityMonitoringRuleCreatePayload.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(cases, filters, isEnabled, message, name, options, queries, tags);
+    return Objects.hash(
+        cases, filters, hasExtendedTitle, isEnabled, message, name, options, queries, tags, type);
   }
 
   @Override
@@ -294,12 +355,14 @@ public class SecurityMonitoringRuleCreatePayload {
     sb.append("class SecurityMonitoringRuleCreatePayload {\n");
     sb.append("    cases: ").append(toIndentedString(cases)).append("\n");
     sb.append("    filters: ").append(toIndentedString(filters)).append("\n");
+    sb.append("    hasExtendedTitle: ").append(toIndentedString(hasExtendedTitle)).append("\n");
     sb.append("    isEnabled: ").append(toIndentedString(isEnabled)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    options: ").append(toIndentedString(options)).append("\n");
     sb.append("    queries: ").append(toIndentedString(queries)).append("\n");
     sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }

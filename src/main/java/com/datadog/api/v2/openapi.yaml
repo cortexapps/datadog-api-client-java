@@ -10497,6 +10497,7 @@ components:
             notifications:
             - notifications
             - notifications
+          hasExtendedTitle: true
           filters:
           - query: query
           - query: query
@@ -10550,6 +10551,7 @@ components:
             notifications:
             - notifications
             - notifications
+          hasExtendedTitle: true
           filters:
           - query: query
           - query: query
@@ -10598,7 +10600,7 @@ components:
             total_filtered_count: 1
       properties:
         data:
-          description: TODO.
+          description: Object containing the list of rules.
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
           type: array
@@ -10657,8 +10659,9 @@ components:
       description: Create a new rule.
       example:
         cases: []
+        hasExtendedTitle: true
         isEnabled: true
-        name: ""
+        name: My security monitoring rule.
         options:
           newValueOptions: {}
         filters:
@@ -10682,6 +10685,11 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
         isEnabled:
           description: Whether the rule is enabled.
           example: true
@@ -10692,7 +10700,7 @@ components:
           type: string
         name:
           description: The name of the rule.
-          example: ""
+          example: My security monitoring rule.
           type: string
         options:
           $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
@@ -10711,6 +10719,8 @@ components:
             description: Tag.
             type: string
           type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleType'
       required:
       - cases
       - isEnabled
@@ -10959,13 +10969,13 @@ components:
           type: string
         query:
           description: Query to run on logs.
-          example: a < 3
+          example: a > 3
           type: string
       required:
       - query
       type: object
     SecurityMonitoringRuleResponse:
-      description: Detection rule.
+      description: Rule.
       example:
         cases:
         - condition: condition
@@ -10978,6 +10988,7 @@ components:
           notifications:
           - notifications
           - notifications
+        hasExtendedTitle: true
         filters:
         - query: query
         - query: query
@@ -11040,6 +11051,10 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          type: boolean
         id:
           description: The ID of the rule.
           type: string
@@ -11071,6 +11086,8 @@ components:
             description: Tag.
             type: string
           type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleType'
         version:
           description: The version of the rule.
           format: int64
@@ -11090,6 +11107,16 @@ components:
       - MEDIUM
       - HIGH
       - CRITICAL
+    SecurityMonitoringRuleType:
+      default: log_detection
+      description: Type of the rule.
+      enum:
+      - log_detection
+      - configuration
+      type: string
+      x-enum-varnames:
+      - LOG_DETECTION
+      - CONFIGURATION
     SecurityMonitoringRuleUpdatePayload:
       description: Update an existing rule.
       example:
@@ -11104,6 +11131,7 @@ components:
           notifications:
           - notifications
           - notifications
+        hasExtendedTitle: true
         isEnabled: true
         name: name
         options:
@@ -11137,6 +11165,7 @@ components:
           agentRule:
             expression: expression
             agentRuleId: etc_shadow
+        version: 1
         tags:
         - tags
         - tags
@@ -11152,6 +11181,11 @@ components:
           items:
             $ref: '#/components/schemas/SecurityMonitoringFilter'
           type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
         isEnabled:
           description: Whether the rule is enabled.
           type: boolean
@@ -11174,6 +11208,12 @@ components:
             description: Tag.
             type: string
           type: array
+        version:
+          description: The version of the rule being updated.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
       type: object
     SecurityMonitoringRuntimeAgentRule:
       description: The Agent rule.
